@@ -16,8 +16,8 @@ key = b'[EX\xc8\xd5\xbfI{\xa2$\x05(\xd5\x18\xbf\xc0\x85)\x10nc\x94\x02)j\xdf\xcb
 menu = """
     1. Presiona '1' para cifrar el archivo.
     2. Presiona '2' para descifrar.
-    3. Presiona '3' para cifrar todos los archivos en esta carpeta.
-    4. Presiona '4' para descifrar todos los archivos de esta carpeta.
+    3. Presiona '3' para cifrar todos los archivos .pdf en esta carpeta.
+    4. Presiona '4' para descifrar todos los archivos .pdf de esta carpeta.
     5. Presiona '5' para salir."
 """
 
@@ -74,8 +74,9 @@ class Encryptor:
         dirs = []
         for dirName, subdirList, fileList in os.walk(dir_path):
             for fname in fileList:
-                if (fname != 'aes.py' and fname != 'data.txt.enc'):
-                    dirs.append(dirName + "\\" + fname)
+                if (fname != 'aes.py' and fname != 'data.txt.enc' and (".pdf" in  fname or ".txt" in fname or ".docx" in fname or ".odt" in fname)):
+                    dirs.append(dirName + "/" + fname)
+                    print(fname)
         return dirs
 
     # Encrypts all files on same directory
@@ -160,6 +161,9 @@ ii. ¿Que modo de AES uso? ¿Por que?
 
 iii. ¿Que parámetros tuvo que hacer llegar desde su funcion de Encrypt la Decrypt? ¿Porque?
     Initializing Vector (IV), key, el texto cifrado y modo (CBC)
+
+    El vector de inicializacion permite comenzar a cifrar el primer bloque (dado a que no se cuenta con un bloque anterior) 
+    de texto, se debe pasar del encrypt al decrypt para poder decifrar
 """
 
 
